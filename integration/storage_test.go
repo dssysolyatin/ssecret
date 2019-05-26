@@ -3,15 +3,16 @@ package integration
 import (
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/dssysolyatin/ssecret/storage"
-	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"math/rand"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/dssysolyatin/ssecret/storage"
+	"github.com/stretchr/testify/require"
 )
 
 func testStorage(storage storage.Storage, t *testing.T) {
