@@ -23,3 +23,8 @@ func (c *console) ReadPassword(ctx context.Context, desc string) (string, error)
 	fmt.Printf("\n")
 	return string(passwd), err
 }
+
+func (c *console) Print(ctx context.Context, output string) error {
+	fmt.Println(output)
+	return nil
+}
