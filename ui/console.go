@@ -1,8 +1,10 @@
 package ui
 
 import (
+	"bufio"
 	"context"
 	"fmt"
+	"os"
 	"syscall"
 
 	"golang.org/x/crypto/ssh/terminal"
@@ -11,10 +13,11 @@ import (
 var _ UI = (*console)(nil)
 
 type console struct {
+	reader *bufio.Reader
 }
 
 func NewConsoleUI() *console {
-	return &console{}
+	return &console{reader: bufio.NewReader(os.Stdin)}
 }
 
 func (c *console) ReadPassword(ctx context.Context, desc string) (string, error) {
@@ -22,6 +25,11 @@ func (c *console) ReadPassword(ctx context.Context, desc string) (string, error)
 	passwd, err := terminal.ReadPassword(syscall.Stdin)
 	fmt.Printf("\n")
 	return string(passwd), err
+}
+
+func (c *console) ReadString(ctx context.Context, desc string) (string, error) {
+	fmt.Print(desc)
+	return c.reader.ReadString('\n')
 }
 
 func (c *console) Print(ctx context.Context, output string) error {
